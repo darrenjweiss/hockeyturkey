@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hockey Turkey</title>
+<meta name="description" content="Slab City HOA, Surf to Saddle, Donuts Bring Joy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ice: #EEF4F7;
+    --ice-deep: #DCE7EE;
+    --ink: #1A2230;
+    --ink-soft: #4A5566;
+    --red-line: #C8102E;
+    --blue-line: #1F4FA3;
+    --feather: #8A5A2B;
+    --surface: #FFFFFF;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ice: #111C27;
+      --ice-deep: #1A2836;
+      --ink: #E8EEF2;
+      --ink-soft: #A7B3C0;
+      --red-line: #FF5A6E;
+      --blue-line: #7FA6F0;
+      --feather: #D9A066;
+      --surface: #162231;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ice);
+    color: var(--ink);
+    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.55;
+  }
+
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--blue-line); outline-offset: 3px; }
+
+  /* ---------- Hero: the rink ---------- */
+  .rink {
+    position: relative;
+    min-height: 88vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 4rem 1.5rem;
+    border-bottom: 6px solid var(--ink);
+  }
+  .rink::before,
+  .rink::after {           /* blue lines */
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 14px;
+    background: var(--blue-line);
+    opacity: .85;
+  }
+  .rink::before { left: 22%; }
+  .rink::after  { right: 22%; }
+  .center-line {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 14px;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(to bottom, var(--red-line) 0 36px, transparent 36px 48px);
+  }
+  /* Bowling scorecard: three strikes drawn as crossed hockey sticks */
+  .scorecard {
+    display: block;
+    width: min(78vw, 440px);
+    height: auto;
+    margin: 2rem auto 0;
+  }
+  .scorecard .frame { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+  .scorecard .ball-box { fill: none; stroke: var(--ink); stroke-width: 3; }
+  .scorecard .frame-num { fill: var(--ink-soft); font: 600 13px "Bricolage Grotesque", Arial, sans-serif; }
+  .scorecard .stick {
+    fill: none;
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .scorecard .stick.a { stroke: var(--blue-line); }
+  .scorecard .stick.b { stroke: var(--red-line); }
+  .hero-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    background: var(--ice);
+    padding: 1.5rem 2rem 1.75rem;
+  }
+  h1 {
+    font-size: clamp(3.5rem, 13vw, 10rem);
+    font-weight: 800;
+    font-stretch: 75%;
+    line-height: .86;
+    letter-spacing: -.02em;
+  }
+  h1 span { display: block; }
+  h1 span:last-child { color: var(--feather); }
+
+  /* ---------- Ideas ---------- */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+  }
+  .intro {
+    max-width: 60ch;
+    margin-bottom: 3.5rem;
+  }
+  h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 750;
+    font-stretch: 85%;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .intro p { color: var(--ink-soft); }
+
+  .ideas { list-style: none; }
+  .idea {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .75rem;
+    padding: 2.25rem 0 2.25rem 1.5rem;
+    border-left: 8px solid var(--accent, var(--blue-line));
+    margin-bottom: 1.5rem;
+    background: var(--surface);
+    padding-right: 1.5rem;
+  }
+  .idea:nth-child(1) { --accent: var(--feather); }
+  .idea:nth-child(2) { --accent: var(--blue-line); }
+  .idea:nth-child(3) { --accent: var(--red-line); }
+
+  .idea h3 {
+    font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+    font-weight: 700;
+    font-stretch: 80%;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+  .idea h3 a { text-decoration: none; }
+  .idea h3 a:hover { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+  .idea p { max-width: 62ch; color: var(--ink-soft); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+    border-top: 2px solid var(--ice-deep);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--ink-soft);
+  }
+  footer a { font-weight: 650; color: var(--ink); }
+
+  @media (max-width: 600px) {
+    .rink::before { left: 8%; }
+    .rink::after  { right: 8%; }
+    .hero-text { padding: 1rem 1rem 1.25rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .scorecard .stick {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: draw 380ms ease-out forwards;
+    }
+    .scorecard .f1 .a { animation-delay: 200ms; }
+    .scorecard .f1 .b { animation-delay: 480ms; }
+    .scorecard .f2 .a { animation-delay: 860ms; }
+    .scorecard .f2 .b { animation-delay: 1140ms; }
+    .scorecard .f3 .a { animation-delay: 1520ms; }
+    .scorecard .f3 .b { animation-delay: 1800ms; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+  }
+</style>
+</head>
+<body>
+
+  <header class="rink">
+    <div class="center-line" aria-hidden="true"></div>
+    <div class="hero-text">
+      <h1><span>Hockey</span><span>Turkey</span></h1>
+      <svg class="scorecard" viewBox="0 0 362 172" role="img" aria-label="A bowling scorecard showing three strikes in a row, each strike drawn as two crossed hockey sticks">
+        <g class="f1">
+          <text class="frame-num" x="9" y="14">1</text>
+          <rect class="frame" x="1" y="20" width="120" height="150"/>
+          <rect class="ball-box" x="85" y="20" width="36" height="36"/>
+          <path class="stick a" pathLength="1" d="M23 66 L83 154 Q87 160 93 160 L105 160"/>
+          <path class="stick b" pathLength="1" d="M99 66 L39 154 Q35 160 29 160 L17 160"/>
+        </g>
+        <g class="f2">
+          <text class="frame-num" x="129" y="14">2</text>
+          <rect class="frame" x="121" y="20" width="120" height="150"/>
+          <rect class="ball-box" x="205" y="20" width="36" height="36"/>
+          <path class="stick a" pathLength="1" d="M143 66 L203 154 Q207 160 213 160 L225 160"/>
+          <path class="stick b" pathLength="1" d="M219 66 L159 154 Q155 160 149 160 L137 160"/>
+        </g>
+        <g class="f3">
+          <text class="frame-num" x="249" y="14">3</text>
+          <rect class="frame" x="241" y="20" width="120" height="150"/>
+          <rect class="ball-box" x="325" y="20" width="36" height="36"/>
+          <path class="stick a" pathLength="1" d="M263 66 L323 154 Q327 160 333 160 L345 160"/>
+          <path class="stick b" pathLength="1" d="M339 66 L279 154 Q275 160 269 160 L257 160"/>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="ideas-heading">
+      <h2 id="ideas-heading">Ideas</h2>
+    </section>
+
+    <ul class="ideas">
+      <li class="idea">
+        <h3><a href="https://slabcityhoa.com">slabcityhoa.com</a></h3>
+        <p>A homeowners association for the one place in America that has no homeowners and no rules. Part performance piece, part love letter to the off-grid desert, with newsletters, bylaws, and violations nobody has to follow.</p>
+      </li>
+
+      <li class="idea">
+        <h3><a href="https://surftosaddle.com">surftosaddle.com</a></h3>
+        <p>A brand built around Pacific Northwest living. It celebrates life from the ranch to the surf, and all that lies between. Pastures that roll down to the coast, redwood groves, foggy mornings, cold water, and the small towns that hold it all together.</p>
+      </li>
+
+      <li class="idea">
+        <h3><a href="https://donutsbringjoy.com">donutsbringjoy.com</a></h3>
+        <p>A simple belief turned into a product: a dozen donuts is the fastest way to change the mood of a room. Send a box to someone who needs it, and let the donuts do the talking.</p>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Hockey Turkey &copy; 2026</p>
+    <p>Have a thought on one of these? <a href="mailto:hockeyturkeyproductions@gmail.com">Email hockeyturkeyproductions@gmail.com</a></p>
+  </footer>
+
+</body>
+</html>
